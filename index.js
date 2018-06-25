@@ -25,26 +25,26 @@ var deployedContract = TokenContract.new({ data: '0x'+byteCode, from: web3.eth.a
 
 fs.writeFileSync("Token.json", JSON.stringify(deployedContract))
 
-var address = '0x82a8d775c8746cb1d701e1eb3aa84d3c6ecdfb0b'
-var ci = TokenContract.at(address)
+// var address = '0x82a8d775c8746cb1d701e1eb3aa84d3c6ecdfb0b'
+// var ci = TokenContract.at(address)
 
-var events = ci.allEvents([]);
+// var events = ci.allEvents([]);
 
-// watch for changes
-events.watch(function (error, event) {
-  if (!error)
-    console.log("NAME ",event.event,"RESULT - ", event.args);
-  else {
-    console.log("ERROR:", error);
-  }
-});
+// // watch for changes
+// events.watch(function (error, event) {
+//   if (!error)
+//     console.log("NAME ",event.event,"RESULT - ", event.args);
+//   else {
+//     console.log("ERROR:", error);
+//   }
+// });
 
-ci.createRandomToken("pikachu", "0xca35b7d915458ef540ade6068dfe2f44e8fa733c" , 
-  {
-    from: "0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2",
-    gas: 879873
-  },
-  function (a, b) {
-    console.log(a, b);
-  }
-)
+// ci.createRandomToken("pikachu", "0xca35b7d915458ef540ade6068dfe2f44e8fa733c" , 
+//   {
+//     from: "0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2",
+//     gas: 879873
+//   },
+//   function (a, b) {
+//     console.log(a, b);
+//   }
+// )
