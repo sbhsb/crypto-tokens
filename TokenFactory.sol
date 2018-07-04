@@ -1,8 +1,8 @@
 pragma solidity ^0.4.19;
 
-contract TokenFactory {
+import "./ERC800.sol";
 
-    event NewToken(uint tokenId, string name, bytes32 tokenHash);
+contract TokenFactory is ERC800 {
 
     struct Token {
       string name;
@@ -32,7 +32,7 @@ contract TokenFactory {
         return tokenHash;
     }
 
-    function createRandomToken(string _name, bytes32 imageHash) public {
+    function createToken(string _name, bytes32 imageHash) public {
         address walletId = msg.sender;
         uint random_number = uint(blockhash(block.number-1))%10 + 1;
         bytes32 tokenHash = _generateRandomDna(walletId, imageHash, random_number);
