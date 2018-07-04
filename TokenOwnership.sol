@@ -14,15 +14,16 @@ contract TokenOwnership is TokenFactory {
     return tokenToOwner[_tokenId];
   }
 
-  function _transfer(address _from, address _to, uint256 _tokenId) private onlyOwnerOf(_tokenId){
+  function _transfer(address _from, address _to, uint256 _tokenId, uint price) private onlyOwnerOf(_tokenId){
     ownerTokenCount[_to]++;
     ownerTokenCount[msg.sender]--;
     tokenToOwner[_tokenId] = _to;
+    msg.sender.transfer(price);
     emit Transfer(_from, _to, _tokenId);
   }
 
-  function transfer(address _to, uint256 _tokenId) public {
-    _transfer(msg.sender, _to, _tokenId);
+  function transfer(address _to, uint256 _tokenId, uint price) public {
+    _transfer(msg.sender, _to, _tokenId, price);
   }
 
   // function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) {

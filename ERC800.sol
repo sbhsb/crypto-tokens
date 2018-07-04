@@ -6,7 +6,7 @@ contract ERC800 {
     function balanceOf(address _owner) public view returns (uint256 balance);
     function ownerOf(uint256 _tokenId) public view returns (address owner);
     // function approve(address _to, uint256 _tokenId) public;
-    function transfer(address _to, uint256 _tokenId) public;
+    function transfer(address _to, uint256 _tokenId, uint price) public;
     // function transferFrom(address _from, address _to, uint256 _tokenId) public;
     function createToken(string _name, bytes32 imageHash) public;
 

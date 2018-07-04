@@ -50,19 +50,19 @@ events.watch(function (error, event) {
 //   }
 // )
 
-// ci.transfer("0xc8A1380beC4A2cBE32927698008df8BBCA7bf7d1", 0 , 
-//   {
-//     from: "0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2",
-//     gas: 879873
-//   },
-//   function (a, b) {
-//     console.log(a, b);
-//   }
-// )
+ci.transfer("0xc8A1380beC4A2cBE32927698008df8BBCA7bf7d1", 0, 1,
+  {
+    from: "0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2",
+    gas: 879873
+  },
+  function (a, b) {
+    console.log(a, b);
+  }
+)
 
- var owner = ci.ownerOf( 0 )
+//  var owner = ci.ownerOf( 0 )
 
 //  var balance = ci.balanceOf("0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2")
 
-console.log("ownerxx" , owner)
+// console.log("ownerxx" , owner)
 // console.log("ownerbbbbbbbbb", balance.toNumber() )
