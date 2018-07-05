@@ -42,4 +42,18 @@ contract TokenOwnership is TokenFactory {
      _transfer(owner, msg.sender, _tokenId);
      owner.transfer(price);
    }
+   
+   function convertOwner(address _to, uint256 _tokenId, uint priceC) public payable {
+       require(tokenApprovals[_tokenId] == msg.sender);
+       address owner = ownerOf(_tokenId);
+       address realOwner = originalOwner[_tokenId];
+       uint royaltyAmmount = ((priceC * 50)/100);
+       uint remainAmmount = priceC - royaltyAmmount;
+       ownerTokenCount[_to]++;
+       ownerTokenCount[msg.sender]--;
+       tokenToOwner[_tokenId] = _to;
+       realOwner.transfer(royaltyAmmount);
+       owner.transfer(remainAmmount);
+       emit Transfer(owner, _to, _tokenId);
+   }
 }
