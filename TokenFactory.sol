@@ -14,6 +14,7 @@ contract TokenFactory is ERC800 {
 
     mapping (uint => address) public tokenToOwner;
     mapping (address => uint) ownerTokenCount;
+    mapping (uint => address) public originalOwner;
     
     modifier onlyOwnerOf(uint _tokenId) {
     require(msg.sender == tokenToOwner[_tokenId]);
@@ -23,6 +24,7 @@ contract TokenFactory is ERC800 {
     function _createToken(string _name, bytes32 tokenHash, bytes32 imageHash) internal {
         uint id = tokens.push(Token(_name, tokenHash, imageHash)) - 1;
         tokenToOwner[id] = msg.sender;
+        originalOwner[id] = msg.sender;
         ownerTokenCount[msg.sender]++;
         emit NewToken(id, _name, tokenHash);
     }
