@@ -1,27 +1,82 @@
 pragma solidity ^0.4.19;
 
 contract ERC800 {
-    // Required methods
-    // function totalSupply() public view returns (uint256 total);
-    function balanceOf(address _owner) public view returns (uint256 balance);
-    function ownerOf(uint256 _tokenId) public view returns (address owner);
-    function approve(address _to, uint256 _tokenId, uint price) public payable;
-    // function transfer(address _to, uint256 _tokenId, uint price) public;
+
+    bytes4 internal constant InterfaceId_ERC721 = 0x80ac58cd;
+    /**
+    * 0x80ac58cd ===
+    *   bytes4(keccak256('balanceOf(address)')) ^
+    *   bytes4(keccak256('ownerOf(uint256)')) ^
+    *   bytes4(keccak256('approve(address,uint256)')) ^
+    *   bytes4(keccak256('getApproved(uint256)')) ^
+    *   bytes4(keccak256('setApprovalForAll(address,bool)')) ^
+    *   bytes4(keccak256('isApprovedForAll(address,address)')) ^
+    *   bytes4(keccak256('transferFrom(address,address,uint256)')) ^
+    *   bytes4(keccak256('safeTransferFrom(address,address,uint256)')) ^
+    *   bytes4(keccak256('safeTransferFrom(address,address,uint256,bytes)'))
+    */
+
+    bytes4 internal constant InterfaceId_ERC721Exists = 0x4f558e79;
+    /**
+    * 0x4f558e79 ===
+    *   bytes4(keccak256('exists(uint256)'))
+    */
+
+    bytes4 internal constant InterfaceId_ERC721Enumerable = 0x780e9d63;
+    /**
+    * 0x780e9d63 ===
+    *   bytes4(keccak256('totalSupply()')) ^
+    *   bytes4(keccak256('tokenOfOwnerByIndex(address,uint256)')) ^
+    *   bytes4(keccak256('tokenByIndex(uint256)'))
+    */
+
+    bytes4 internal constant InterfaceId_ERC721Metadata = 0x5b5e139f;
+    /**
+    * 0x5b5e139f ===
+    *   bytes4(keccak256('name()')) ^
+    *   bytes4(keccak256('symbol()')) ^
+    *   bytes4(keccak256('tokenURI(uint256)'))
+    */
+
+
+
+    function balanceOf(address _owner) public view returns (uint256 _balance);
+    function ownerOf(uint256 _tokenId) public view returns (address _owner);
+    function exists(uint256 _tokenId) public view returns (bool _exists);
+
+    function approve(address _to, uint256 _tokenId) public;
+    function getApproved(uint256 _tokenId) public view returns (address _operator);
+    function setApprovalForAll(address _operator, bool _approved) public;
+    function isApprovedForAll(address _owner, address _operator) public view returns (bool);
+    function transferFrom(address _from, address _to, uint256 _tokenId) public;
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) public;
+    function safeTransferFrom( address _from,address _to,uint256 _tokenId,bytes _data)public;
+
+    /* function approve(address _to, uint256 _tokenId, uint price) public payable;
+    function transfer(address _to, uint256 _tokenId, uint price) public;
     function takeOwnership(uint256 _tokenId) public payable;
-    // function transferFrom(address _from, address _to, uint256 _tokenId) public;
-    function createToken(string _name, bytes32 imageHash) public;
+    function createToken(string _name, bytes32 imageHash) public; */
 
-    // Events
-    event Transfer(address from, address to, uint256 tokenId);
-    event NewToken(uint tokenId, string name, bytes32 tokenHash);
-    event Approval(address owner, address approved, uint256 tokenId);
+    event Transfer(
+        address indexed _from,
+        address indexed _to,
+        uint256 indexed _tokenId
+    );
+    event Approval(
+        address indexed _owner,
+        address indexed _approved,
+        uint256 indexed _tokenId
+    );
+    event ApprovalForAll(
+        address indexed _owner,
+        address indexed _operator,
+        bool _approved
+    );
 
-    // Optional
-    // function name() public view returns (string name);
-    // function symbol() public view returns (string symbol);
-    // function tokensOfOwner(address _owner) external view returns (uint256[] tokenIds);
-    // function tokenMetadata(uint256 _tokenId, string _preferredTransport) public view returns (string infoUrl);
-
-    // ERC-165 Compatibility (https://github.com/ethereum/EIPs/issues/165)
-    // function supportsInterface(bytes4 _interfaceID) public view returns (bool);
+    
+    function name() public view returns (string name);
+    function symbol() public view returns (string symbol);
+    function tokensOfOwner(address _owner) external view returns (uint256[] tokenIds);
+    function tokenMetadata(uint256 _tokenId, string _preferredTransport) public view returns (string infoUrl);
+    
 }

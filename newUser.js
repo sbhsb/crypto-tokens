@@ -1,7 +1,9 @@
+//0xaabcc0b41a53a329c57700acb23dd7d355ef64da
+
 var Web3 = require('web3-quorum')
 var web3 = new Web3(new Web3.providers.HttpProvider("http://13.126.36.79:22000"));
 web3.personal.unlockAccount(web3.eth.accounts[web3.eth.accounts.length-1],'')
-var acct = web3.eth.accounts[web3.eth.accounts.length-1]
+var acct = "0xaabcc0b41a53a329c57700acb23dd7d355ef64da"
 var solc = require('solc')
 var fs = require('fs')
 
@@ -36,7 +38,7 @@ var ci = TokenContract.at(address)
 
 var events = ci.allEvents([]);
 
-watch for changes
+//watch for changes
 events.watch(function (error, event) {
   if (!error)
     console.log("NAME ",event.event,"RESULT - ", event.args, 'tokenId - ', event.args.tokenId.toNumber());
@@ -44,31 +46,3 @@ events.watch(function (error, event) {
     console.log("ERROR:", error);
   }
 });
-
-
-ci.createToken("chukapi", "0xca35b7d915458ef540ade6068dfe2f44e8fa733c" , 
-  {
-    from: acct,
-    gas: 879873
-  },
-  function (a, b) {
-    console.log(a, b);
-  }
-)
-
-// ci.transfer("0xc8A1380beC4A2cBE32927698008df8BBCA7bf7d1", 0, 1,
-//   {
-//     from: "0x4b3687c4e5BcD0E794B90bAd52e9fDe427F42fc2",
-//     gas: 879873
-//   },
-//   function (a, b) {
-//     console.log(a, b);
-//   }
-// )
-
-//  var owner = ci.ownerOf( 0 )
-
-  var balance = ci.balanceOf(acct)
-
-// console.log("ownerxx" , owner)
-// console.log("ownerbbbbbbbbb", balance.toNumber() )
