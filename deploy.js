@@ -2,7 +2,7 @@ const Web3 = require('web3')
 const solc = require('solc')
 const fs = require('fs')
 
-var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://13.126.36.79:22000"));
 
 var input = {
     'ERC800.sol': fs.readFileSync('ERC800.sol', 'utf8'),
